@@ -204,9 +204,6 @@ inc si
 mov [si],bh
 hlt
 ```
-
-
-## obj 5
  large 
  ```
 MOV AX,2F00H 
@@ -245,6 +242,8 @@ DEC CH
 JNZ L1
 HLT
 ```
+
+## obj 5
 
 
 ## obj 6
