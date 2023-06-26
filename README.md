@@ -177,3 +177,103 @@ dec cl
 jnz l1
 hlt
 ```
+## obj 4
+
+smallest and largest
+```
+mov ax,3000h
+mov ds,ax
+mov si,1000h
+mov cl,[si]
+inc si
+mov bl,[si]
+mov bh,[si]
+back: mov al,[si]
+cmp al,bl
+jnz l1
+mov b1,[si]
+l1: mov ah ,[si]
+cmp ah,[si]
+jc l2
+mov bh,[si]
+l2: inc si
+dec cl
+jnz back
+mov [si],bl
+inc si
+mov [si],bh
+hlt
+```
+
+
+## obj 5
+ large 
+ ```
+MOV AX,2F00H 
+MOV DS, AX
+MOV SI,4E00H
+MOV AX, 00H
+ MOV CX, 05H
+BACK: CMP AX, [SI]
+JNC FWD
+MOV AX, [SI]
+JNC FWD
+MOV AX,[SI]
+FWD: INC SI
+INC SI
+DEC CX
+JNZ BACK
+MOV[4E0AH], AX
+HLT
+```
+dec 
+```
+MOV CH,05H
+ L1:MOV CL,05H
+MOV SI, 3000H
+L2: MOV AL, [SI]
+MOV AH, [SI+1]
+CMP AL, AH
+JNC L3
+JZ L3
+MOV [SI], AH
+ MOV [SI+1],AL
+ L3: INC SI
+DEC CL
+JNZ L2
+DEC CH
+JNZ L1
+HLT
+```
+
+
+## obj 6
+
+largest in array
+```
+mov 
+
+
+separate even odd
+```
+.global_start
+_start:
+ldr r0, =count
+ldr r1, [r0]
+mov r2,0*00
+ldr r3, array
+ldr r4, =even
+ldr r5, =odd
+back:ldr r6,[r3],#4
+ands r7,r6,#1
+beq fwd
+str r6, [r4], #4
+b fwd1
+fwd:str r6,[r4],#4
+fwd1: str r1,r1,#01
+bne back
+exit:b exit
+.data
+count:words 0*07
+array: .word 0*
+```
