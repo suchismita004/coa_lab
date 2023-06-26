@@ -251,29 +251,67 @@ HLT
 
 largest in array
 ```
-mov 
+.global_start
+_start:
+ldr r0,=count
+ldr r1, [r0]
+mov r4, #0x00
+ldr r2,=array
+back: ldr r3, [r2],#4
+cmp r4,r3
+bgt fwd
+mov r4,r3
+fwd: subs r1,r1,#01
+bne back
+str r4, [r2]
+exit: b exit
+.data
+count: word 0x05
+array: .word 0x15,0x35,0x45,0x10,0x4f
+```
 
+smallest in array
+```
+.global_start
+_start:
+ldr r0,=count
+ldr rl, [r0]
+mov r4, #0xff
+ldr r2,=array
+back: ldr r3, [r2],#4
+cmp r4,r3
+blt fwd
+mov r4,r3
+fwd: subs r1,r1,#01
+bne back
+str r4, [r2]
+exit: b exit
+.data
+count: word 0x05
+array: word 0x15,0x35,0x45,0x10,0x4f
+```
 
 separate even odd
 ```
 .global_start
 _start:
 ldr r0, =count
-ldr r1, [r0]
-mov r2,0*00
-ldr r3, array
-ldr r4, =even
-ldr r5, =odd
-back:ldr r6,[r3],#4
-ands r7,r6,#1
-beq fwd
-str r6, [r4], #4
-b fwd1
-fwd:str r6,[r4],#4
-fwd1: str r1,r1,#01
-bne back
-exit:b exit
+ldr r1, =odd_list
+mov r2, =even_list
+ldr r3, =count
+ldr r3,[r3]
+loop:ldr r4,[r0],#4
+and r5,r4,#1
+cmp r5,#1
+beq odd
+str r4,[r2],#4
+bal flow
+odd:str r4,[r1],#4
+forw:subs r3,r3,#1
+bne loop
+mov r7,#1
+swi 0
 .data
-count:words 0*07
-array: .word 0*
+count: .words 5
+array: .word 0*11 0*12 0*13 0*14 0*15
 ```
