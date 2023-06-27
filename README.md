@@ -66,6 +66,18 @@ add ax,bx
 mov [3004h],ax
 hlt
 ```
+OR
+```
+mov ax,[0000h]
+mov ds,ax
+mov bx,[4000h]
+mov cx,[4002h]
+l1: add ax,bx
+dec cx
+jnz l1
+mov [4004h],ax
+hlt
+```
 division of two 16bits numbers without using DIV instruction.
 ```
 mov si,4000h
@@ -82,7 +94,7 @@ hlt
 ```
 
 ## obj2
- 2's complement
+ 2's complement 78 88
 ```
 mov al,[3500h]
 not al
@@ -90,7 +102,7 @@ add al,01h
 mov [3501h],al
 hlt
 ```
- grays code
+ grays code  27 34
  ```
 mov bl,[4100h]
 mov al,bl
@@ -126,6 +138,9 @@ hlt
 ## obj 3
 
  find the sum and average of n 16-bit number
+ ``
+ 5000: 01 1A 02 23 03 0B 04 04-05 BC 06 11
+ ``
 ```
 mov ax,0000h
 mov dx,0000h
@@ -146,6 +161,7 @@ mov [5014h],ax
 hlt
 ```
 count 1's in an 8bit 
+5800: 74 04
 ```
 mov ax,0000h
 mov ds,ax
@@ -163,6 +179,12 @@ hlt
 ```
 
 move block 16bit data from one location to other
+``
+5700:10 A3 26 01 F2 31 76 EC-50 39 BD 1C 45 23 9A 26
+``
+``
+5710:06 13 09 07 
+``
 ```
 mov si,5700h
 mov di,5720h
